@@ -36,7 +36,9 @@ This structure mirrors real‑world AQI systems where **estimation and forecasti
 
 ## Dataset Description
 
-- **Source:** Cleaned CPCB‑style air quality dataset  
+- **Source:** Cleaned CPCB‑style air quality dataset
+- Sonawani, Shilpa; Patil, Kailas (2021), “Delhi Multi-Site Air-Quality Data Set ”, Mendeley Data, V1, doi: 10.17632/bzhzr9b64v.1
+- https://data.mendeley.com/datasets/bzhzr9b64v/1
 - **Location:** Delhi monitoring stations  
 - **Granularity:** Hourly observations  
 
