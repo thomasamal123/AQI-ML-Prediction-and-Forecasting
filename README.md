@@ -139,7 +139,7 @@ The model files are hosted externally on Google Drive and must be downloaded bef
 
 🔗 **Download model files here:**  
 https://drive.google.com/drive/folders/1T6Y6beTGZDETiooL7PJ6ifO0bjMEbXTX?usp=drive_link
-⚠️ Note:  
+##⚠️ Note:  
 The notebook and Flask application will not run correctly unless the model files are downloaded and placed in the `MODELS/` directory as shown above.
 
 
