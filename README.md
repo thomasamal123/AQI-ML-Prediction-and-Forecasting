@@ -166,7 +166,7 @@ The notebook and Flask application will not run correctly unless the model files
 
 ---
 
-## Flask Deployment (Secondary Component)
+## Flask Deployment
 
 A **Flask web application** is provided separately to:
 - Load trained models
