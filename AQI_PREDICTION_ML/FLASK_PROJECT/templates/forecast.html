@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Part B – Next-hour AQI Forecast</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="bg-forecast">
+    <div class="overlay"></div>
+
+    <!-- ===== HEADER ===== -->
+    <header class="topbar">
+        <div class="brand">
+            <span class="dot"></span>
+            <div>
+                <h1>Part B • Next-hour AQI Forecast</h1>
+                <p>Dataset-driven time-series forecasting</p>
+            </div>
+        </div>
+        <a class="pill link" href="/">← Home</a>
+    </header>
+
+    <!-- ===== MAIN ===== -->
+    <main class="container">
+
+        <!-- Info -->
+        <section class="card hero">
+            <h2>Select base time</h2>
+            <p class="muted">
+                This model predicts <strong>next-hour AQI</strong> using historical data.
+                Lag features are <strong>automatically extracted</strong> from the dataset.
+            </p>
+        </section>
+
+        <!-- Error message -->
+        {% if page_error %}
+        <section class="card error">
+            <strong>Error:</strong> {{ page_error }}
+        </section>
+        {% endif %}
+
+        <!-- ===== FORM ===== -->
+        <section class="card form-card">
+            <form method="POST" action="/forecast" class="grid">
+
+                <!-- Station -->
+                <div class="field">
+                    <label for="station">Monitoring Station</label>
+                    <input list="stations"
+                           id="station"
+                           name="station"
+                           placeholder="Type station name"
+                           required>
+                    <datalist id="stations">
+                        <option value="Ashok Vihar">
+                        <option value="Dwarka Sec-8">
+                        <option value="Okhla">
+                    </datalist>
+                </div>
+
+                <!-- Year -->
+                <div class="field">
+                    <label for="year">Year</label>
+                    <select id="year" name="year" required>
+                        <option value="2018">2018</option>
+                        <option value="2019">2019</option>
+                    </select>
+                </div>
+
+                <!-- Month -->
+                <div class="field">
+                    <label for="month">Month</label>
+                    <input type="number"
+                           id="month"
+                           name="month"
+                           min="1"
+                           max="12"
+                           required>
+                </div>
+
+                <!-- Day -->
+                <div class="field">
+                    <label for="day">Day</label>
+                    <input type="number"
+                           id="day"
+                           name="day"
+                           min="1"
+                           max="31"
+                           required>
+                </div>
+
+                <!-- Hour -->
+                <div class="field">
+                    <label for="hour">Hour (0–23)</label>
+                    <input type="number"
+                           id="hour"
+                           name="hour"
+                           min="0"
+                           max="23"
+                           required>
+                </div>
+
+                <!-- Buttons -->
+                <div class="actions">
+                    <button class="btn" type="submit">
+                        Forecast Next-hour AQI
+                    </button>
+                    <button class="btn ghost" type="reset">
+                        Reset
+                    </button>
+                </div>
+
+            </form>
+        </section>
+
+        <!-- Explanation -->
+        <section class="card">
+            <h3>How forecasting works</h3>
+            <p class="muted">
+                The system retrieves pollutant and weather values for the selected time,
+                computes lag features (previous hour and previous day),
+                and predicts AQI for the next hour using a trained Random Forest model.
+            </p>
+        </section>
+
+    </main>
+
+</body>
+</html>

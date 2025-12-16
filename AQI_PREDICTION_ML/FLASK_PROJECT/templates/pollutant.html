@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Part A - Pollutant AQI Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="bg-pollutant">
+    <div class="overlay"></div>
+
+    <!-- ===== HEADER ===== -->
+    <header class="topbar">
+        <div class="brand">
+            <span class="dot"></span>
+            <div>
+                <h1>Part A • Pollutant AQI Prediction</h1>
+                <p>Predict current AQI from pollutants and meteorological inputs</p>
+            </div>
+        </div>
+        <a class="pill link" href="/">← Home</a>
+    </header>
+
+    <!-- ===== MAIN ===== -->
+    <main class="container">
+
+        <!-- Info -->
+        <section class="card hero">
+            <h2>Enter input values</h2>
+            <p class="muted">
+                These inputs represent real-time pollutant concentrations and
+                meteorological conditions used to estimate <b>current AQI</b>.
+            </p>
+        </section>
+
+        <!-- Error -->
+        {% if page_error %}
+        <section class="card error">
+            <strong>Error:</strong> {{ page_error }}
+        </section>
+        {% endif %}
+
+        <!-- ===== FORM ===== -->
+        <section class="card form-card">
+            <form action="/pollutant" method="POST" class="grid">
+
+                {% for f in features %}
+                <div class="field">
+                    <label for="{{ f }}">{{ f }}</label>
+                    <input id="{{ f }}"
+                           name="{{ f }}"
+                           type="number"
+                           step="any"
+                           value="{{ defaults.get(f, 0) }}"
+                           required />
+                </div>
+                {% endfor %}
+
+                <div class="actions">
+                    <button class="btn" type="submit">
+                        Predict Current AQI
+                    </button>
+                    <button class="btn ghost" type="reset">
+                        Reset
+                    </button>
+                </div>
+
+            </form>
+        </section>
+
+        <!-- Explanation -->
+        <section class="card">
+            <p class="muted">
+                The prediction is generated using a trained Random Forest model
+                based on CPCB-aligned AQI formulation and historical pollutant data.
+            </p>
+        </section>
+
+    </main>
+</body>
+</html>

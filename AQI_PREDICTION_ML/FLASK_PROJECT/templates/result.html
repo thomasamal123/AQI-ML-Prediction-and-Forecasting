@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="bg-result">
+    <div class="overlay"></div>
+
+    <!-- ===== HEADER ===== -->
+    <header class="topbar">
+        <div class="brand">
+            <span class="dot"></span>
+            <div>
+                <h1>Result</h1>
+                <p>{{ mode_title if mode_title else "AQI Output" }}</p>
+            </div>
+        </div>
+        <a class="pill link" href="/">← Home</a>
+    </header>
+
+    <!-- ===== MAIN ===== -->
+    <main class="container">
+
+        <!-- ===== PAGE ERROR ===== -->
+        {% if page_error is defined and page_error %}
+        <section class="card hero">
+            <h2 class="bad">Error</h2>
+            <p class="muted">{{ page_error }}</p>
+        </section>
+
+        {% else %}
+
+        <!-- ===== PREDICTION ===== -->
+        <section class="card hero">
+            <h2>
+                {% if station %}
+                Predicted AQI (Next Hour)
+                {% else %}
+                Predicted AQI (Current)
+                {% endif %}
+            </h2>
+
+            <div class="result">
+                <div class="big">{{ prediction }}</div>
+                <div class="tag">{{ category }}</div>
+            </div>
+
+            <p class="muted">Category mapped using CPCB AQI bands.</p>
+        </section>
+
+        <!-- ===== FORECAST DETAILS (PART B ONLY) ===== -->
+        {% if station %}
+        <section class="card">
+            <h3>Forecast Details</h3>
+            <div class="inputs">
+                <div class="kv">
+                    <span class="k">Station</span>
+                    <span class="v">{{ station }}</span>
+                </div>
+
+                <div class="kv">
+                    <span class="k">Base Time</span>
+                    <span class="v">{{ base_time }}</span>
+                </div>
+
+                <div class="kv">
+                    <span class="k">Forecast Time</span>
+                    <span class="v">{{ forecast_time }}</span>
+                </div>
+
+                {% if actual is not none %}
+                <div class="kv">
+                    <span class="k">Actual AQI</span>
+                    <span class="v">{{ actual }}</span>
+                </div>
+
+                <div class="kv">
+                    <span class="k">Forecast Error</span>
+                    <span class="v">{{ forecast_error }}</span>
+                </div>
+                {% else %}
+                <div class="kv">
+                    <span class="k">Actual AQI</span>
+                    <span class="v">Not available</span>
+                </div>
+                {% endif %}
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- ===== INPUTS USED (PART A ONLY) ===== -->
+        {% if payload is defined and payload %}
+        <section class="card">
+            <h3>Inputs Used</h3>
+            <div class="inputs">
+                {% for k, v in payload.items() %}
+                <div class="kv">
+                    <span class="k">{{ k }}</span>
+                    <span class="v">{{ v }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        {% endif %}
+    </main>
+</body>
+</html>

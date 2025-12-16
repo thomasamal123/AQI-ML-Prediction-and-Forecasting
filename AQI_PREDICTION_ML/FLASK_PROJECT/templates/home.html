@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AQI ML System - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="bg-home">
+    <div class="overlay"></div>
+
+    <!-- ===== HEADER ===== -->
+    <header class="topbar">
+        <div class="brand">
+            <span class="dot"></span>
+            <div>
+                <h1>AQI Prediction System</h1>
+                <p>Random Forest • Current AQI & Next-hour Forecasting</p>
+            </div>
+        </div>
+        <div class="pill">Flask Web Application</div>
+    </header>
+
+    <!-- ===== MAIN ===== -->
+    <main class="container">
+
+        <!-- Intro -->
+        <section class="card hero">
+            <h2>Select an option</h2>
+            <p class="muted">
+                <b>Part A</b> predicts <b>current AQI</b> from pollutant and weather inputs.
+                <br>
+                <b>Part B</b> predicts <b>next-hour AQI</b> using historical time-series data,
+                where lag features are <b>automatically derived</b> from past observations.
+            </p>
+
+            <div class="btn-row">
+                <a class="btn big" href="/pollutant">
+                    Part A • Pollutant AQI Prediction
+                </a>
+                <a class="btn big ghost" href="/forecast">
+                    Part B • Next-hour AQI Forecast
+                </a>
+            </div>
+        </section>
+
+        <!-- API Section -->
+        <section class="card">
+            <h3>Available API Endpoints</h3>
+            <p class="muted">
+                The system also exposes REST APIs for integration and testing.
+            </p>
+            <ul class="list">
+                <li><code>GET /api/features/pollutant</code> – pollutant feature list</li>
+                <li><code>POST /api/predict/pollutant</code> – current AQI prediction</li>
+            </ul>
+        </section>
+
+        <!-- Footer note -->
+        <section class="card">
+            <p class="muted">
+                Dataset scope: Delhi monitoring stations (2018–2019).<br>
+                Forecasting is restricted to available historical data.
+            </p>
+        </section>
+
+    </main>
+
+</body>
+</html>
