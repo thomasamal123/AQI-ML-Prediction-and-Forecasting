@@ -192,4 +192,3 @@ Portfolio Project – Machine Learning & Flask Deployment
 ## License
 
 This project is intended for **educational and portfolio purposes**.  
-You may add an MIT License if you wish to open-source it.
